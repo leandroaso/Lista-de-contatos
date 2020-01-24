@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using Entidades.Models;
 using EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +21,7 @@ namespace Core.Repository
             return context.Contatos.ToList();
         }
 
-        public Contato GetByID(int id)
+        public Contato GetByID(long id)
         {
             return context.Contatos.Find(id);
         }
@@ -31,7 +31,7 @@ namespace Core.Repository
             context.Contatos.Add(student);
         }
 
-        public void Delete(int id)
+        public void Delete(long id)
         {
             Contato contato = context.Contatos.Find(id);
             context.Contatos.Remove(contato);
@@ -39,7 +39,22 @@ namespace Core.Repository
 
         public void Update(Contato contato)
         {
-            context.Entry(contato).State = EntityState.Modified;
+            var contatoAtualizado = GetByID(contato.Id);
+
+            foreach (var telefone in contatoAtualizado?.Telefones)
+            {
+                context.Entry(telefone).State = EntityState.Deleted;
+            }
+
+            foreach (var telefone in contato?.Telefones)
+            {
+                contatoAtualizado.Telefones.Add(telefone);
+            }
+
+            contatoAtualizado.Nome = contato.Nome;
+            contatoAtualizado.CPF = contato.CPF;
+            contatoAtualizado.DataNascimento = contato.DataNascimento;
+            contatoAtualizado.Email = contato.Email;
         }
 
         public void Save()

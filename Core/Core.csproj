@@ -8,8 +8,4 @@
     <ProjectReference Include="..\EntityFrameworkCore\EntityFrameworkCore.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repository\" />
-  </ItemGroup>
-
 </Project>

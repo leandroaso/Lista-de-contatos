@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Repository;
+using Entidades.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,36 +13,44 @@ namespace ListaDeContatos.Controllers
     [ApiController]
     public class ContatoController : ControllerBase
     {
-        // GET: api/Contato
+        private readonly IContatoRepository _repository;
+        public ContatoController(IContatoRepository repository)
+        {
+            _repository = repository;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Contato> Get()
         {
-            return new string[] { "value1", "value2" };
+            var result = _repository.ToList();
+            return result;
         }
 
-        // GET: api/Contato/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public Contato Get(int id)
         {
-            return "value";
+            return _repository.GetByID(id);
         }
 
-        // POST: api/Contato
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Contato contato)
         {
+            _repository.Insert(contato);
+            _repository.Save();
         }
 
-        // PUT: api/Contato/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public void Put([FromBody] Contato contato)
         {
+            _repository.Update(contato);
+            _repository.Save();
         }
 
-        // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _repository.Delete(id);
+            _repository.Save();
         }
     }
 }
