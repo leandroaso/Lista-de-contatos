@@ -8,20 +8,26 @@ namespace EntityFrameworkCore
 {
     public class ContatoContext : DbContext
     {
+        private string conectionStringPadao => @"Server=(localdb)\mssqllocaldb;Database=ListaDeContatos;Integrated Security=True";
+        private string _conectionString;
         public ContatoContext(DbContextOptions<ContatoContext> options) : base(options)
         {
         }
+
         public ContatoContext()
         {
-
+            _conectionString = conectionStringPadao;
+        }
+        public ContatoContext(string conectionsString)
+        {
+            _conectionString = conectionsString;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
                 .UseLazyLoadingProxies()
-                .UseSqlServer(
-               @"Server=(localdb)\mssqllocaldb;Database=ListaDeContatos;Integrated Security=True");
+                .UseSqlServer(_conectionString ?? conectionStringPadao);
         }
 
         public DbSet<Contato> Contatos { get; set; }
