@@ -60,7 +60,7 @@ namespace Core.Repository
                     _context.Entry(telefone).State = EntityState.Deleted;
 
             if (contato.Telefones != null)
-                foreach (var telefone in contato.Telefones)
+                foreach (var telefone in contato.Telefones.ToList())
                     contatoAtualizado.Telefones.Add(telefone);
 
             contatoAtualizado.Nome = contato.Nome;
