@@ -15,6 +15,7 @@ export class ContatoFormComponent implements OnInit {
   faTrashAlt = faTrashAlt;
   form: FormGroup;
   submitted = false;
+  isUpdate = false;
   telefones: any[] = [];
 
   constructor(
@@ -28,7 +29,12 @@ export class ContatoFormComponent implements OnInit {
     this.route.params
       .pipe(
         map((params: any) => params['id']),
-        switchMap(id => this.contatosService.getById(id)),
+        switchMap((id) => {
+          if(id){
+            this.isUpdate = true;
+          }
+          return this.contatosService.getById(id)
+        }),
       )
       .subscribe(contato => this.updateForm(contato));
 
@@ -74,11 +80,11 @@ export class ContatoFormComponent implements OnInit {
     }
   }
 
-  onAddTelefone(){
+  onAddTelefone() {
     let telefone = {
       ddd: this.form.value.ddd,
       numero: this.form.value.telefone
-    }    
+    }
     this.telefones.push(telefone);
 
     this.form.patchValue({
@@ -90,7 +96,7 @@ export class ContatoFormComponent implements OnInit {
   updateForm(contato) {
     this.telefones = contato.telefones;
     console.log(this.telefones);
-    
+
     this.form.patchValue({
       id: contato.id,
       nome: contato.nome,
@@ -104,16 +110,16 @@ export class ContatoFormComponent implements OnInit {
     this.router.navigate(['/contato']);
   }
 
-  onDeleteTelefone(index){
+  onDeleteTelefone(index) {
     console.log(index)
     this.telefones.splice(index, 1);
   }
 
-  dataFormatada(data){
+  dataFormatada(data) {
     let dataFormatada = new Date(data),
-        dia  = dataFormatada.getDate().toString().padStart(2, '0'),
-        mes  = (dataFormatada.getMonth()+1).toString().padStart(2, '0'),
-        ano  = dataFormatada.getFullYear();
-    return ano+"-"+mes+"-"+dia;
+      dia = dataFormatada.getDate().toString().padStart(2, '0'),
+      mes = (dataFormatada.getMonth() + 1).toString().padStart(2, '0'),
+      ano = dataFormatada.getFullYear();
+    return ano + "-" + mes + "-" + dia;
   }
 }
