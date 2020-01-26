@@ -1,5 +1,6 @@
 using Core.Repository;
 using Entidades.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,14 @@ namespace Core.Test
 {
     public class TesteRepository
     {
-        private string conectionStringTeste => @"Server=(localdb)\mssqllocaldb;Database=ListaDeContatos;Integrated Security=True";
+        private string conectionStringTeste => @"Server=(localdb)\mssqllocaldb;Database=Teste_ListaDeContatos;Integrated Security=True";
         private readonly EntityFrameworkCore.ContatoContext _context;
         private ContatoRepository _repository { get; set; }
 
         public TesteRepository()
         {
-            _context = new EntityFrameworkCore.ContatoContext();
+            _context = new EntityFrameworkCore.ContatoContext(conectionStringTeste);
+            _context.Database.Migrate();
             _repository = new ContatoRepository(_context);
 
             PreparandoSenario();

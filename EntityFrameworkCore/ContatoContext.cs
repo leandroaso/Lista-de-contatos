@@ -27,7 +27,7 @@ namespace EntityFrameworkCore
         {
             optionsBuilder
                 .UseLazyLoadingProxies()
-                .UseSqlServer(_conectionString);
+                .UseSqlServer(_conectionString ?? conectionStringPadao);
         }
 
         public DbSet<Contato> Contatos { get; set; }
