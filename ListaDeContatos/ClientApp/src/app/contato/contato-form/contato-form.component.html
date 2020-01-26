@@ -68,27 +68,29 @@
                     formControlName="telefone" />
             </div>
         </div>
-        <div class="4">
-            <button type="button" class="btn btn-default" (click)="onAddTelefone()">Adicionar</button>
+        <div class="col-md-4 d-flex align-items-center">
+            <span>
+                <button type="button" class="btn btn-primary btn-sm" (click)="onAddTelefone()">Adicionar</button>
+            </span>
         </div>
 
-        <table class="table table-hover table-striped" *ngIf="(telefones.length > 0);">
-            <thead>
-                <tr>
-                    <th>DDD</th>
-                    <th>Telefone</th>
-                    <th>Ações</th>
+        <table class="table table-hover table-striped table-sm " *ngIf="(telefones.length > 0);">
+            <thead clss="thead-dark">
+                <tr class="row">
+                    <th class="col-md-2 d-flex justify-content-center">DDD</th>
+                    <th class="col-md-8 d-flex justify-content-center" >Telefone</th>
+                    <th class="col-md-2 d-flex justify-content-center">Ações</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let telefone of telefones;let idx = index">
-                    <td>{{ telefone.ddd }}</td>
-                    <td>{{ telefone.numero }}</td>
-                    <td>
-                    <span class="float-right">
+                <tr class="row" *ngFor="let telefone of telefones;let idx = index">
+                    <td class="col-md-2 d-flex justify-content-center">{{ telefone.ddd }}</td>
+                    <td class="col-md-8 d-flex justify-content-center">{{ telefone.numero }}</td>
+                    <td class="col-md-2 d-flex justify-content-center">
+                    <span>
                         <button class="btn btn-outline-danger mb-1 btn-sm" (click)="onDeleteTelefone(idx)">
-                            Deletar
-                        </button>
+                            <fa-icon [icon]="faTrashAlt"></fa-icon>
+                        </button>                        
                     </span>
                     </td>
                 </tr>

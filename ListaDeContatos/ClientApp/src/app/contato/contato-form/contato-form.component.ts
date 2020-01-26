@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { switchMap, map } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 import { ContatoService } from '../contato.service';
 
@@ -11,6 +12,7 @@ import { ContatoService } from '../contato.service';
   styleUrls: ['./contato-form.component.css']
 })
 export class ContatoFormComponent implements OnInit {
+  faTrashAlt = faTrashAlt;
   form: FormGroup;
   submitted = false;
   telefones: any[] = [];
