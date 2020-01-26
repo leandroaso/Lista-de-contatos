@@ -53,11 +53,14 @@ export class ContatoComponent implements OnInit {
   }
 
   onDelete(contato) {
-    this.contatosService.delete(contato.id).subscribe(
-      success => {
-        this.onRefresh(this.form.value.nome, this.form.value.cpf);
-      }
-    );
+
+    if (confirm(`Você tem certeza que deseja deletar o contato de "${contato.nome}"`)) {
+      this.contatosService.delete(contato.id).subscribe(
+        success => {
+          this.onRefresh(this.form.value.nome, this.form.value.cpf);
+        }
+      );
+    }
   }
 
 
