@@ -18,7 +18,7 @@
                             <div class="form-group col-md-6">
                                 <label for="cpf">CPF</label>
                                 <input type="text" class="form-control" id="cpf" placeholder="CPF"
-                                    formControlName="cpf">
+                                    formControlName="cpf" mask="000.000.000-00" >
                             </div>
                         </div>
                     </div>
@@ -33,15 +33,15 @@
                 </div>
             </form>
             <div class="row">
-                <table class="table table-hover table-striped" *ngIf="(contatos$ | async) as contatos;">
+                <table class="table table-hover table-striped table-bordered table-sm" *ngIf="(contatos$ | async) as contatos;">
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Nome</th>
+                            <th>Nome</th >
                             <th>E-mail</th>
-                            <th>CPF</th>
+                            <th>CPF</th> 
                             <th>Idade</th>
-                            <th>Quantidade de telefones</th>
+                            <th>Qtd telefones</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
@@ -57,11 +57,11 @@
                             <td>
                                 <span class="float-right">
                                     <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(contato.id)">
-                                        Atualizar
+                                        <fa-icon [icon]="faEdit"></fa-icon>
                                     </button>
 
                                     <button class="btn btn-outline-danger mb-1 btn-sm" (click)="onDelete(contato)">
-                                        Remover
+                                        <fa-icon [icon]="faTrashAlt"></fa-icon>
                                     </button>
                                 </span>
                             </td>

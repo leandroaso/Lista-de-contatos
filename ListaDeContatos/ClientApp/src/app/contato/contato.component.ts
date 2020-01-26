@@ -5,12 +5,16 @@ import { Observable, empty } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
+import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-contato',
   templateUrl: './contato.component.html',
   styleUrls: ['./contato.component.css']
 })
 export class ContatoComponent implements OnInit {
+  faTrashAlt = faTrashAlt;
+  faEdit = faEdit;
   form: FormGroup;
   contatos$: Observable<any[]>;
 

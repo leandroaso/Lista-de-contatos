@@ -78,8 +78,13 @@ export class ContatoFormComponent implements OnInit {
     let telefone = {
       ddd: this.form.value.ddd,
       numero: this.form.value.telefone
-    }
+    }    
     this.telefones.push(telefone);
+
+    this.form.patchValue({
+      ddd: "",
+      telefone: "",
+    });
   }
 
   updateForm(contato) {
