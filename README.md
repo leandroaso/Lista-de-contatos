@@ -1,5 +1,5 @@
 # Lista-de-contatos
-CRUD simples usando .net core, angular e LocalDB.
+CRUD simples usando .net core, angular, Entity Framework Core e LocalDB.
 
 ### Pré-requisitos
 
