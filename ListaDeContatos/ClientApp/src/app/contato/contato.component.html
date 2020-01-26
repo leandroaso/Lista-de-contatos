@@ -1,0 +1,74 @@
+<div class="card mt-3">
+    <div class="card-header">
+        <div class="float-left">
+            <h4>Listagem de Pessoas</h4>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <form class="col-md-12" [formGroup]="form">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="nome">Nome</label>
+                                <input type="text" class="form-control" id="nome" placeholder="Nome"
+                                    formControlName="nome">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="cpf">CPF</label>
+                                <input type="text" class="form-control" id="cpf" placeholder="CPF"
+                                    formControlName="cpf">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="float-right form-group">
+                            <button type="button" class="btn btn-sm btn-outline-primary"
+                                (click)="onSearch()">Pesquisar</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary"
+                                [routerLink]="['novo']">Cadastrar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <table class="table table-hover table-striped" *ngIf="(contatos$ | async) as contatos;">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>CPF</th>
+                            <th>Idade</th>
+                            <th>Quantidade de telefones</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let contato of contatos">
+                            <td>{{ contato.id }}</td>
+                            <td>{{ contato.nome }}</td>
+                            <td>{{ contato.email }}</td>
+                            <td>{{ contato.cpf }}</td>
+                            <td>{{ calculaIdade(contato.dataNascimento) }}</td>
+
+                            <td>{{ contato.telefones.length }}</td>
+                            <td>
+                                <span class="float-right">
+                                    <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(contato.id)">
+                                        Atualizar
+                                    </button>
+
+                                    <button class="btn btn-outline-danger mb-1 btn-sm" (click)="onDelete(contato)">
+                                        Remover
+                                    </button>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

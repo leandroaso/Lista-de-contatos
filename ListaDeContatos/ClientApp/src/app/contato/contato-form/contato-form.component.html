@@ -1,0 +1,102 @@
+<br>
+<h3>Cadastro de contato</h3>
+<form class="needs-validation" [formGroup]="form">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" class="form-control" id="nome" placeholder="Nome" formControlName="nome"
+                    [ngClass]="{'is-invalid' : fildIsValid('nome')}" />
+
+                <div class="invalid-feedback" *ngIf="fildIsValid('nome') && hasError('nome')['required']">
+                    Por favor informe um nome para o contato.
+                </div>
+                <div class="invalid-feedback" *ngIf="fildIsValid('nome') && hasError('nome')['minlength']">
+                    Nome precisa ter no mínimo {{ hasError('nome')['minlength'].requiredLength }} caracteres.
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="cpf">CPF</label>
+                <input type="text" class="form-control" id="email" placeholder="CPF" formControlName="cpf"
+                    [ngClass]="{'is-invalid' : fildIsValid('email')}" />
+
+                <div class="invalid-feedback" *ngIf="fildIsValid('cpf') && hasError('cpf')['required']">
+                    Por favor informe um CPF para o contato.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="text" class="form-control" id="email" placeholder="E-mail" formControlName="email"
+                    [ngClass]="{'is-invalid' : fildIsValid('email')}" />
+
+                <div class="invalid-feedback" *ngIf="fildIsValid('email') && hasError('email')['required']">
+                    Por favor informe um e-mail para o contato.
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="dataNascimento">Data de nascimento</label>
+                <input type="date" class="form-control" id="dataNascimento" placeholder="Data de nascimento"
+                    formControlName="dataNascimento" [ngClass]="{'is-invalid' : fildIsValid('dataNascimento')}" />
+
+                <div class="invalid-feedback"
+                    *ngIf="fildIsValid('dataNascimento') && hasError('dataNascimento')['required']">
+                    Por favor informe uma data de nascimento para o contato.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="ddd">DDD</label>
+                <input type="text" class="form-control" id="ddd" placeholder="DDD" formControlName="ddd" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input type="text" class="form-control" id="telefone" placeholder="Telefone"
+                    formControlName="telefone" />
+            </div>
+        </div>
+        <div class="4">
+            <button type="button" class="btn btn-default" (click)="onAddTelefone()">Adicionar</button>
+        </div>
+
+        <table class="table table-hover table-striped" *ngIf="(telefones.length > 0);">
+            <thead>
+                <tr>
+                    <th>DDD</th>
+                    <th>Telefone</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let telefone of telefones;let idx = index">
+                    <td>{{ telefone.ddd }}</td>
+                    <td>{{ telefone.numero }}</td>
+                    <td>
+                    <span class="float-right">
+                        <button class="btn btn-outline-danger mb-1 btn-sm" (click)="onDeleteTelefone(idx)">
+                            Deletar
+                        </button>
+                    </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="form-group">
+        <button type="sumit" class="btn btn-primary" (click)="onSubmit()">Salvar</button>
+        <button type="button" class="btn btn-default" (click)="onCancel()">Cancelar</button>
+    </div>
+</form>

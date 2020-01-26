@@ -20,10 +20,12 @@ namespace ListaDeContatos.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Contato> Get()
+        public IEnumerable<Contato> Get(string nome, string cpf)
         {
-            var result = _repository.ToList();
-            return result;
+            if (string.IsNullOrWhiteSpace(nome) && string.IsNullOrWhiteSpace(cpf))
+                return _repository.ToList();
+
+            return _repository.Get(nome, cpf);
         }
 
         [HttpGet("{id}", Name = "Get")]
