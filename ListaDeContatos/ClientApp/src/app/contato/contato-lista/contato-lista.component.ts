@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { ContatoService } from './contato.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, empty } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { ContatoService } from '../contato.service';
 
 @Component({
-  selector: 'app-contato',
-  templateUrl: './contato.component.html',
-  styleUrls: ['./contato.component.css']
+  selector: 'app-contato-lista',
+  templateUrl: './contato-lista.component.html',
+  styleUrls: ['./contato-lista.component.css']
 })
-export class ContatoComponent implements OnInit {
+export class ContatoListaComponent implements OnInit {
   faTrashAlt = faTrashAlt;
   faEdit = faEdit;
   form: FormGroup;
@@ -62,7 +62,6 @@ export class ContatoComponent implements OnInit {
       );
     }
   }
-
 
   calculaIdade(nascimento) {
     console.log(nascimento);
